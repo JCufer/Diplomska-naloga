@@ -1,7 +1,9 @@
 Bag Attributes
     localKeyID: ED 51 99 82 37 E5 93 48 D1 C6 86 8C B9 A7 8C ED 34 4D D7 38 
 subject=C = DE, L = Dortmund, O = IDSA, OU = IDS Reference Testbed, CN = DAPS
+
 issuer=C = DE, L = Dortmund, O = IDSA, OU = IDS Reference Testbed, CN = ReferenceTestbedSubCA
+
 -----BEGIN CERTIFICATE-----
 MIIDljCCAxugAwIBAgIURZjVg9i/QOO4zE8pumE0tvM766MwCgYIKoZIzj0EAwMw
 bzELMAkGA1UEBhMCREUxETAPBgNVBAcTCERvcnRtdW5kMQ0wCwYDVQQKEwRJRFNB
