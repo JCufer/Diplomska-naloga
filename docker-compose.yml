@@ -5,7 +5,7 @@ services:
     container_name: omejdn
     ports:
       - 80:80
-      - 443:443
+      - 443:443      
     environment:
       - OMEJDN_DOMAIN=${OMEJDN_DOMAIN}
       - OMEJDN_PATH=${OMEJDN_PATH}
@@ -33,8 +33,6 @@ services:
       - ./DAPS/keys:/opt/keys
     networks:
       - local
-    depends_on:
-      - omejdn
 
   omejdn-ui:
     image: ghcr.io/fraunhofer-aisec/omejdn-ui:${UI_VERSION}
@@ -45,10 +43,8 @@ services:
       - CLIENT_ID=adminUI
     networks:
       - local
-    depends_on:
-      - omejdn
 
-  # Add the PostgreSQL container to be used by DataspaceConnectorA and DataspaceConnectorB
+# Add the PostgreSQL container to be used by DataspaceConnectorA and DataspaceConnectorB
   postgresa:
     image: postgres:13
     container_name: 'postgresa-container'
@@ -62,9 +58,7 @@ services:
       - connector-dataa:/var/lib/postgresql/data
     networks:
       - local
-    depends_on:
-      - omejdn
-
+      
   postgresb:
     image: postgres:13
     container_name: 'postgresb-container'
@@ -78,9 +72,7 @@ services:
       - connector-datab:/var/lib/postgresql/data
     networks:
       - local
-    depends_on:
-      - omejdn
-
+      
   connectora:
     image: ghcr.io/international-data-spaces-association/dataspace-connector:8.0.2
     container_name: connectora
@@ -94,7 +86,7 @@ services:
       - DAPS_INCOMING_DAT_DEFAULT_WELLKNOWN=/jwks.json
       - SERVER_SSL_KEY-STORE=file:///conf/connectorA.p12
       # Define the PostgreSQL setup
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresa:5432/connectoradb
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresa:5432/connectoradb 
       - SPRING_DATASOURCE_PLATFORM=postgres
       - SPRING_DATASOURCE_DRIVERCLASSNAME=org.postgresql.Driver
       - SPRING_DATASOURCE_USERNAME=postgresusera
@@ -108,7 +100,7 @@ services:
       - local
     depends_on:
       - postgresa
-
+      
   connectorb:
     image: ghcr.io/international-data-spaces-association/dataspace-connector:8.0.2
     container_name: connectorb
@@ -123,7 +115,7 @@ services:
       - DAPS_INCOMING_DAT_DEFAULT_WELLKNOWN=/jwks.json
       - SERVER_SSL_KEY-STORE=file:///conf/connectorB.p12
       # Define the PostgreSQL setup     
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresb:5432/connectorbdb
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresb:5432/connectorbdb 
       - SPRING_DATASOURCE_USERNAME=postgresuserb
       - SPRING_DATASOURCE_PASSWORD=password
       - SPRING_DATASOURCE_PLATFORM=postgres
